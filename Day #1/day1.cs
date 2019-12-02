@@ -3,17 +3,6 @@
 
         static int Part1() => File.ReadAllLines("input.txt").Select(x => GetFuel(double.Parse(x))).Sum();
 
-        static int Part2()
-        {
-            int sum = 0;
-            foreach (string line in File.ReadAllLines("input.txt"))
-            {
-                int tmp = GetFuel(double.Parse(line));
-                while (tmp > 0)
-                {
-                    sum += tmp;
-                    tmp = GetFuel(tmp);
-                }
-            }
-            return sum;
-        }
+        static int GetFuelFuel(int x) => x + ((GetFuel(x) > 0) ? GetFuelFuel(GetFuel(x)) : 0);
+        
+        static int Part2() => File.ReadAllLines("input.txt").Select(x => GetFuelFuel(GetFuel(double.Parse(x)))).Sum();
